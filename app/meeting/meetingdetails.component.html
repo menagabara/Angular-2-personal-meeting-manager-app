@@ -1,0 +1,110 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body {font-family: "Lato", sans-serif}
+    .mySlides {display: none}
+</style>
+<body>
+<div class="w3-top">
+    <div class="w3-bar w3-black w3-card-2">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a routerLink="/" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+        <a routerLink="/meeting" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Meetings</a>
+        <a routerLink="/dashboard" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MORE</a>
+        <a routerLink="/aboutus" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT US</a>
+        <a [routerLink]="['/login']" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOGOUT</a>
+    </div>
+</div>
+
+
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+        <div *ngIf="selectedmeeting">
+            <h2 class="w3-wide">{{selectedmeeting.title}} Details.</h2>
+            <p class="w3-opacity"><i>View And Edit It.</i></p>
+
+            <div class="form-group">
+                <label for="title">title</label>
+                <input type="title" [(ngModel)]="selectedmeeting.title"
+                       name="title"
+                       class="form-control" id="title"
+                       required #title="ngModel">
+            </div>
+            <div [hidden]="title.valid || title.pristine"
+                 class="alert alert-danger">
+                Meeting's title is required
+            </div>
+
+            <div class="form-group">
+                <label for="date">date</label>
+                <input type="text" [(ngModel)]="selectedmeeting.date"
+                       name="date"
+                       class="form-control" id="date"
+                       required #date="ngModel">
+            </div>
+            <div [hidden]="date.valid || date.pristine"
+                 class="alert alert-danger">
+                Meeting's date is required
+            </div>
+
+            <div class="form-group">
+                <label for="place">place</label>
+                <input type="text" [(ngModel)]="selectedmeeting.place"
+                       name="place"
+                       class="form-control" id="place"
+                       required #place="ngModel">
+            </div>
+            <div [hidden]="place.valid || place.pristine"
+                 class="alert alert-danger">
+                Meeting's place is required
+            </div>
+
+            <div class="form-group">
+                <label for="purpose">purpose</label>
+                <input type="text" [(ngModel)]="selectedmeeting.purpose"
+                       name="purpose"
+                       class="form-control" id="purpose"
+                       required #purpose="ngModel">
+            </div>
+            <div [hidden]="purpose.valid || purpose.pristine"
+                 class="alert alert-danger">
+                Meeting's purpose is required
+            </div>
+
+            <div class="form-group">
+                <label for="power">Priority</label>
+                <select class="form-control" id="priority" [(ngModel)]="selectedmeeting.priority" name="priority" required>
+                    <option *ngFor=" let p of priority " [value]= "p" >{{p}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="power">state</label>
+                <select class="form-control" id="state" [(ngModel)]= " selectedmeeting.state " name="state" required>
+                    <option *ngFor=" let s of state " [value]="s">{{s}}</option>
+                </select>
+            </div>
+
+            <button [disabled]="loading" class="w3-button w3-black" (click)="goBack()">Back</button>
+            <button [disabled]="loading" class="w3-button w3-black" (click)="save()">Save</button>
+            <button [disabled]="loading" class="w3-button w3-black" (click)="delete(selectedmeeting);$event.stopPropagation()">Delete</button>
+
+        </div>
+    </div>
+</div>
+
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="" target="_blank">Mena Gabara</a></p>
+</footer>
+
+</body>

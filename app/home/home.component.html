@@ -1,0 +1,97 @@
+﻿<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body {font-family: "Lato", sans-serif}
+    .mySlides {display: none}
+</style>
+<body>
+<div class="w3-top">
+    <div class="w3-bar w3-black w3-card-2">
+        <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+        <a routerLink="/" class="w3-bar-item w3-button w3-padding-large">HOME</a>
+        <a routerLink="/meeting" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Meetings</a>
+        <a routerLink="/dashboard" class="w3-bar-item w3-button w3-padding-large w3-hide-small">MORE</a>
+        <a routerLink="/aboutus" class="w3-bar-item w3-button w3-padding-large w3-hide-small">ABOUT US</a>
+        <a [routerLink]="['/login']" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOGOUT</a>
+    </div>
+</div>
+
+
+<div class="w3-content" style="max-width:2000px;margin-top:46px">
+
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
+        <h2 class="w3-wide">Bueons dias,{{currentUser.username}}</h2>
+        <p class="w3-opacity"><i>personal info.</i></p>
+        <p class="w3-justify"><strong>Username:</strong> {{currentUser.username}}</p>
+        <p class="w3-justify"><strong>first name:</strong> {{currentUser.firstName}}</p>
+        <p class="w3-justify"><strong>last name:</strong> {{currentUser.lastName}}</p>
+    </div>
+
+    <div class="w3-black" id="tour">
+        <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+            <h2 class="w3-wide w3-center">EDIT INFO.</h2>
+            <p class="w3-opacity w3-center"><i>modify your personal info.</i></p><br>
+
+            <form>
+                <label> Username: </label><br />
+                <input type="text" name="username" [(ngModel)]=currentUser.username /><br />
+                <label>FirstName: </label><br />
+                <input type="text" name="firstName" [(ngModel)]=currentUser.firstName /><br />
+                <label>LastName: </label><br />
+                <input type="text" name="lastName" [(ngModel)]=currentUser.lastName /><br />
+                <label>Password: </label><br />
+                <input type="text" name="password" [(ngModel)]=currentUser.password /><br />
+            </form>
+        </div>
+    </div>
+
+    <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="meeting">
+        <h2 class="w3-wide">Meetings</h2>
+        <p class="w3-opacity"><i>View All Or Top Meetings.</i></p>
+
+        <nav>
+            <button [disabled]="loading" class="w3-button w3-black"><a routerLink="/meeting" routerLinkActive="active">Meetings</a></button>
+            <button [disabled]="loading" class="w3-button w3-black"><a routerLink="/dashboard" routerLinkActive="active">More</a></button>
+        </nav>
+
+    </div>
+
+    <div class="w3-black" id="m">
+        <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+            <h2 class="w3-wide w3-center">To-do List.</h2>
+            <p class="w3-opacity w3-center"><i>Add OR Delete Task.</i></p><br>
+
+            <button class="w3-button w3-block w3-black"  style="cursor:pointer;" (click)="toggleTasks()">{{showTasks ?
+                "Hide Tasks" : "Show Tasks"}}</button>
+            <div *ngIf="showTasks">
+                <ul>
+                    <br><br>
+                    <li *ngFor="let task of tasks; let i = index">
+                        <p  class="w3-justify"><button  class=" w3-button w3-black w3-tiny" (click)="deleteTask(i)">x</button> {{task}} </p>
+                    </li>
+                </ul>
+                <form class="w3-justify" (submit)="addTask(task.value)">
+                    <label>Add A task: </label><br />
+                    <input type="text" #task /><br />
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="" target="_blank">Mena Gabara</a></p>
+</footer>
+
+</body>

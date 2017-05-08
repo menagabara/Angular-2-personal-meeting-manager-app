@@ -1,0 +1,33 @@
+<div class="w3-black" id="tour">
+    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
+        <h2 class="w3-wide w3-center">Search.</h2>
+        <p class="w3-opacity w3-center"><i>Search By Title.</i></p><br>
+        <div align="center">
+            <input  size="45" #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+
+            <div *ngFor="let me of m | async"
+                 (click)="gotoDetail(me)" class="search-result" >
+                {{me.title}}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="meeting">
+    <h2 class="w3-wide">Filter.</h2>
+    <p class="w3-opacity"><i>Filter By Place.</i></p>
+
+    <div align="center">
+        <input size="45" #filterBox id="filter-box" (keyup)="filter(filterBox.value)" />
+        <div>
+            <div *ngFor="let ff of f | async"
+                 (click)="gotoDetails(ff)" class="filter-result" >
+                {{ff.title}}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
